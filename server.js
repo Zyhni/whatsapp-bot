@@ -1,3 +1,16 @@
+
+const express = require('express');
+const http = require('http');
+const { Server } = require('socket.io');
+const qrcode = require('qrcode');
+const path = require('path');
+const fs = require('fs');
+
+const { Client, LocalAuth, MessageMedia } = require('whatsapp-web.js');
+
+const app = express();
+const server = http.createServer(app);
+const io = new Server(server);
 const KEEP_ALIVE_INTERVAL = 30000; // 30 detik
 
 // Tambahkan ini setelah route health check
@@ -16,19 +29,6 @@ setInterval(() => {
     console.log('❤️  Bot is alive and responding');
   }
 }, KEEP_ALIVE_INTERVAL);
-const express = require('express');
-const http = require('http');
-const { Server } = require('socket.io');
-const qrcode = require('qrcode');
-const path = require('path');
-const fs = require('fs');
-
-const { Client, LocalAuth, MessageMedia } = require('whatsapp-web.js');
-
-const app = express();
-const server = http.createServer(app);
-const io = new Server(server);
-
 app.use(express.static(path.join(__dirname, 'public')));
 
 // ======= Whatsapp client setup =======

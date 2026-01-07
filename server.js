@@ -1,3 +1,21 @@
+const KEEP_ALIVE_INTERVAL = 30000; // 30 detik
+
+// Tambahkan ini setelah route health check
+app.get('/ping', (req, res) => {
+  res.json({ 
+    status: 'alive', 
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
+    whatsapp: currentStatus
+  });
+});
+
+// Auto-ping untuk menjaga service tetap hidup
+setInterval(() => {
+  if (currentStatus === 'ready') {
+    console.log('❤️  Bot is alive and responding');
+  }
+}, KEEP_ALIVE_INTERVAL);
 const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');

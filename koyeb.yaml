@@ -1,0 +1,34 @@
+name: whatsapp-bot
+type: Web Service
+build:
+  dockerfile: Dockerfile
+ports:
+  - port: 3000
+    http:
+      paths:
+        - /
+        - /health
+        - /dashboard
+health:
+  path: /health
+  port: 3000
+  interval: 60s
+  timeout: 5s
+  initialDelay: 30s
+scaling:
+  min: 1
+  max: 1
+deployments:
+  - name: production
+    strategy:
+      type: rolling
+resources:
+  cpu: 1000m
+  memory: 1024Mi
+env:
+  - name: NODE_ENV
+    value: production
+  - name: PORT
+    value: "3000"
+  - name: PUPPETEER_EXECUTABLE_PATH
+    value: /usr/bin/google-chrome-stable

@@ -1,6 +1,9 @@
 
 const express = require('express');
 const http = require('http');
+const makeWASocket = require('@whiskeysockets/baileys').default;
+const { useMultiFileAuthState, DisconnectReason } = require('@whiskeysockets/baileys');
+const pino = require('pino');
 const { Server } = require('socket.io');
 const qrcode = require('qrcode');
 const path = require('path');

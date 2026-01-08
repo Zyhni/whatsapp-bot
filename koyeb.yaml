@@ -1,7 +1,9 @@
 name: whatsapp-bot
 type: Web Service
 build:
-  dockerfile: Dockerfile
+  command: npm install
+run:
+  command: npm start
 ports:
   - port: 3000
     http:
